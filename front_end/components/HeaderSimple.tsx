@@ -1,32 +1,6 @@
-import {
-    createStyles,
-    Header,
-    HoverCard,
-    Group,
-    Button,
-    UnstyledButton,
-    Text,
-    SimpleGrid,
-    ThemeIcon,
-    Anchor,
-    Divider,
-    Center,
-    Box,
-    Burger,
-    Drawer,
-    Collapse,
-    ScrollArea, Title,
-} from '@mantine/core';
+import {createStyles, Header, HoverCard, Group, Button, UnstyledButton, Text, SimpleGrid, ThemeIcon, Anchor, Divider, Center, Box, Burger, Drawer, Collapse, ScrollArea, Title,} from '@mantine/core';
 import { useDisclosure } from '@mantine/hooks';
-import {
-    IconNotification,
-    IconCode,
-    IconBook,
-    IconChartPie3,
-    IconFingerprint,
-    IconCoin,
-    IconChevronDown,
-} from '@tabler/icons';
+import {IconNotification, IconCode, IconBook, IconChartPie3, IconFingerprint, IconCoin, IconChevronDown,} from '@tabler/icons';
 
 const useStyles = createStyles((theme) => ({
     link: {
@@ -148,18 +122,20 @@ export default function HeaderSimple() {
         <Box>
             <Header height={90} px="md">
                 <Group position="apart" sx={{ height: '100%' }}>
-                    <Title>Internship Portal</Title>
+                    <a href="/" className={classes.link}>
+                    <Title order={2}>Career Readiness Portal</Title>
+                    </a>
 
                     <Group sx={{ height: '100%' }} spacing={0} className={classes.hiddenMobile}>
-                        <a href="#" className={classes.link}>
-                            Home
+                        <a href="/jobs" className={classes.link}>
+                            Jobs
                         </a>
                         <HoverCard width={600} position="bottom" radius="md" shadow="md" withinPortal>
                             <HoverCard.Target>
-                                <a href="#" className={classes.link}>
+                                <a href="/knowledge-center" className={classes.link}>
                                     <Center inline>
                                         <Box component="span" mr={5}>
-                                            Features
+                                            Knowledge Centre
                                         </Box>
                                         <IconChevronDown size={16} color={theme.fn.primaryColor()} />
                                     </Center>
@@ -169,7 +145,7 @@ export default function HeaderSimple() {
                             <HoverCard.Dropdown sx={{ overflow: 'hidden' }}>
                                 <Group position="apart" px="md">
                                     <Text weight={500}>Features</Text>
-                                    <Anchor href="#" size="xs">
+                                    <Anchor href="/knowledge-center" size="xs">
                                         View all
                                     </Anchor>
                                 </Group>
@@ -199,17 +175,17 @@ export default function HeaderSimple() {
                                 </div>
                             </HoverCard.Dropdown>
                         </HoverCard>
-                        <a href="#" className={classes.link}>
-                            Learn
+                        <a href="/interview-prep" className={classes.link}>
+                            Interview Preparation
                         </a>
-                        <a href="#" className={classes.link}>
-                            Academy
+                        <a href="/resume-builder" className={classes.link}>
+                            Resume Builder
                         </a>
                     </Group>
 
                     <Group className={classes.hiddenMobile}>
-                        <Button variant="default">Log in</Button>
-                        <Button>Sign up</Button>
+                        <Button component={"a"} href={"/login"} variant="default">Log in</Button>
+                        <Button component={"a"} href={"/register"}>Sign up</Button>
                     </Group>
 
                     <Burger opened={drawerOpened} onClick={toggleDrawer} className={classes.hiddenDesktop} />
@@ -228,30 +204,30 @@ export default function HeaderSimple() {
                 <ScrollArea sx={{ height: 'calc(100vh - 60px)' }} mx="-md">
                     <Divider my="sm" color={theme.colorScheme === 'dark' ? 'dark.5' : 'gray.1'} />
 
-                    <a href="#" className={classes.link}>
-                        Home
+                    <a href="/jobs" className={classes.link}>
+                        Jobs
                     </a>
                     <UnstyledButton className={classes.link} onClick={toggleLinks}>
                         <Center inline>
                             <Box component="span" mr={5}>
-                                Features
+                                Knowledge Centre
                             </Box>
                             <IconChevronDown size={16} color={theme.fn.primaryColor()} />
                         </Center>
                     </UnstyledButton>
                     <Collapse in={linksOpened}>{links}</Collapse>
-                    <a href="#" className={classes.link}>
-                        Learn
+                    <a href="/interview-prep" className={classes.link}>
+                        Interview Preparation
                     </a>
-                    <a href="#" className={classes.link}>
-                        Academy
+                    <a href="/resume-builder" className={classes.link}>
+                        Resume Builder
                     </a>
 
                     <Divider my="sm" color={theme.colorScheme === 'dark' ? 'dark.5' : 'gray.1'} />
 
                     <Group position="center" grow pb="xl" px="md">
-                        <Button variant="default">Log in</Button>
-                        <Button>Sign up</Button>
+                        <Button component={"a"} href={"/login"} variant="default">Log in</Button>
+                        <Button component={"a"} href={"/register"}>Sign up</Button>
                     </Group>
                 </ScrollArea>
             </Drawer>

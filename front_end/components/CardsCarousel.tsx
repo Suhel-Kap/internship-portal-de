@@ -23,7 +23,7 @@ const useStyles = createStyles((theme) => ({
     },
 
     category: {
-        color: theme.black,
+        color: theme.white,
         opacity: 0.7,
         fontWeight: 700,
         textTransform: 'uppercase',
