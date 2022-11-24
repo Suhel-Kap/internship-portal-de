@@ -25,13 +25,13 @@ const useStyles = createStyles((theme) => ({
 }));
 
 interface BadgeCardProps {
-    // image: string;
+    link: string;
     title: string;
     location: string;
     description: string;
 }
 
-export function JobCard({ title, description, location}: BadgeCardProps) {
+export function JobCard({ title, description, location, link}: BadgeCardProps) {
     const { classes, theme } = useStyles();
 
     return (
@@ -62,12 +62,9 @@ export function JobCard({ title, description, location}: BadgeCardProps) {
             {/*</Card.Section>*/}
 
             <Group mt="xs">
-                <Button radius="md" style={{ flex: 1 }}>
+                <Button component={"a"} href={link} target={"_blank"} radius="md" style={{ flex: 1 }}>
                     Show details
                 </Button>
-                <ActionIcon variant="default" radius="md" size={36}>
-                    <IconHeart size={18} className={classes.like} stroke={1.5} />
-                </ActionIcon>
             </Group>
         </Card>
     );

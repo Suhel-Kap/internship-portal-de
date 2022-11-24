@@ -1,9 +1,10 @@
 import Head from 'next/head'
 import Layout from "../components/Layout";
-import {Container, Divider, Grid} from "@mantine/core";
+import {Center, Container, Divider, Grid, Title} from "@mantine/core";
 import CardsCarousel from "../components/CardsCarousel";
 import LatestTech from "../components/LatestTech";
 import {JobCard} from "../components/JobCard";
+import {JOB_DATA} from "../constants";
 
 export default function Home() {
     return (
@@ -21,23 +22,19 @@ export default function Home() {
                 <Divider m={"lg"}/>
                 <LatestTech/>
                 <Divider m={"lg"}/>
-                <Container>
+                <Container size={'md'}>
+                    <Center my={"lg"}>
+                        <Title order={2}>Jobs</Title>
+                    </Center>
                     <Grid m={"md"} gutter={"md"}>
-                        <Grid.Col lg={4}>
-                            <JobCard location={"remote"}
-                                     description={"Lorem ipsum dolor lorem ipsum dolor Lorem ipsum dolor lorem ipsum dolor Lorem ipsum dolor lorem ipsum dolor Lorem ipsum dolor lorem ipsum dolor"}
-                                     title={"SDE Intern"}/>
-                        </Grid.Col>
-                        <Grid.Col lg={4}>
-                            <JobCard location={"remote"}
-                                     description={"Lorem ipsum dolor lorem ipsum dolor Lorem ipsum dolor lorem ipsum dolor Lorem ipsum dolor lorem ipsum dolor Lorem ipsum dolor lorem ipsum dolor"}
-                                     title={"SDE Intern"}/>
-                        </Grid.Col>
-                        <Grid.Col lg={4}>
-                            <JobCard location={"remote"}
-                                     description={"Lorem ipsum dolor lorem ipsum dolor Lorem ipsum dolor lorem ipsum dolor Lorem ipsum dolor lorem ipsum dolor Lorem ipsum dolor lorem ipsum dolor"}
-                                     title={"SDE Intern"}/>
-                        </Grid.Col>
+                        {JOB_DATA.slice(0, 6).map((job) => {
+                            return (
+                                <Grid.Col key={job.link} span={4}>
+                                    <JobCard location={job.company} description={`${job.description.slice(0, 250)}...`}
+                                             title={job.title} link={job.link}/>
+                                </Grid.Col>
+                            )
+                        })}
                     </Grid>
                 </Container>
             </Layout>

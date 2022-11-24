@@ -6,39 +6,42 @@ const {
     experienceLevelFilter,
     events,
 } = require("linkedin-jobs-scraper");
+const fs = require("fs");
 
 (async () => {
     // Each scraper instance is associated with one browser.
     // Concurrent queries will run on different pages within the same browser instance.
     const scraper = new LinkedinScraper({
         headless: true,
-        slowMo: 300,
+        slowMo: 700,
         args: [
             "--lang=en-GB",
         ],
     });
 
     // Add listeners for scraper events
+    let results = [];
 
     // Emitted once for each processed job
     scraper.on(events.scraper.data, (data) => {
-        console.log(
-            data.description,
-            data.descriptionHTML.length,
-            `Query='${data.query}'`,
-            `Location='${data.location}'`,
-            `Id='${data.jobId}'`,
-            `Title='${data.title}'`,
-            `Company='${data.company ? data.company : "N/A"}'`,
-            `CompanyLink='${data.companyLink ? data.companyLink : "N/A"}'`,
-            `CompanyImgLink='${data.companyImgLink ? data.companyImgLink : "N/A"}'`,
-            `Place='${data.place}'`,
-            `Date='${data.date}'`,
-            `Link='${data.link}'`,
-            `applyLink='${data.applyLink ? data.applyLink : "N/A"}'`,
-            `insights='${data.insights}'`,
-        );
+        const obj = {
+            title: data.title,
+            company: data.company || "N/A",
+            description: data.description,
+            date: data.date,
+            link: data.link,
+            applyLink: data.applyLink,
+            location: data.location
+        }
+        console.log(obj);
+        results.push(obj);
+        fs.writeFile("results.json", JSON.stringify(results), (err) => {
+            if (err) {
+                console.log(err);
+            }
+        });
     });
+
 
     // Emitted once for each scraped page
     scraper.on(events.scraper.metrics, (metrics) => {
@@ -67,7 +70,7 @@ const {
                 query: "Software Engineer",
                 options: {
                     locations: ["India"],
-                    limit: 15,
+                    limit: 30,
                     filters: {
                         type: [typeFilter.FULL_TIME, typeFilter.PART_TIME, typeFilter.CONTRACT],
                         relevance: relevanceFilter.RECENT,
@@ -75,16 +78,16 @@ const {
                     },
                 }
             },
-            {
-                query: "Sales",
-                options: {
-                    limit: 10, // This will override global option limit (33)
-                    applyLink: false, // Try to extract apply link. Default to true.
-                    descriptionFn: descriptionFn, // Custom job description processor
-                }
-            },
+            // {
+            //     query: "Sales",
+            //     options: {
+            //         limit: 10, // This will override global option limit (33)
+            //         applyLink: false, // Try to extract apply link. Default to true.
+            //         descriptionFn: descriptionFn, // Custom job description processor
+            //     }
+            // },
         ], { // Global options, will be merged individually with each query options
-            locations: ["Europe"],
+            locations: ["India"],
             limit: 33,
         }),
     ]);
