@@ -22,9 +22,11 @@
     "@types/node": "18.11.9",
     "@types/react": "18.0.25",
     "@types/react-dom": "18.0.9",
+    "cookies-next": "^2.1.1",
     "dayjs": "^1.11.6",
     "embla-carousel-react": "^7.0.5",
     "next": "13.0.4",
+    "next-auth": "^4.17.0",
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "typescript": "4.9.3"

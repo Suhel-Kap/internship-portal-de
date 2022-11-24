@@ -1,6 +1,10 @@
 import {createStyles, Header, HoverCard, Group, Button, UnstyledButton, Text, SimpleGrid, ThemeIcon, Anchor, Divider, Center, Box, Burger, Drawer, Collapse, ScrollArea, Title,} from '@mantine/core';
-import { useDisclosure } from '@mantine/hooks';
+import {useDisclosure} from '@mantine/hooks';
 import {IconNotification, IconCode, IconBook, IconChartPie3, IconFingerprint, IconCoin, IconChevronDown,} from '@tabler/icons';
+import {useEffect, useState} from "react";
+import {isLoggedIn} from "../utils/isLoggedIn";
+import {logout} from "../utils/logout";
+import {useRouter} from "next/router";
 
 const useStyles = createStyles((theme) => ({
     link: {
@@ -50,13 +54,13 @@ const useStyles = createStyles((theme) => ({
     },
 
     hiddenMobile: {
-        [theme.fn.smallerThan('sm')]: {
+        [theme.fn.smallerThan('md')]: {
             display: 'none',
         },
     },
 
     hiddenDesktop: {
-        [theme.fn.largerThan('sm')]: {
+        [theme.fn.largerThan('md')]: {
             display: 'none',
         },
     },
@@ -96,15 +100,21 @@ const mockdata = [
 ];
 
 export default function HeaderSimple() {
-    const [drawerOpened, { toggle: toggleDrawer, close: closeDrawer }] = useDisclosure(false);
-    const [linksOpened, { toggle: toggleLinks }] = useDisclosure(false);
-    const { classes, theme } = useStyles();
+    const [drawerOpened, {toggle: toggleDrawer, close: closeDrawer}] = useDisclosure(false);
+    const [linksOpened, {toggle: toggleLinks}] = useDisclosure(false);
+    const [logged, setLogged] = useState(false)
+    const {classes, theme} = useStyles();
+    const router = useRouter();
+
+    useEffect(() => {
+        isLoggedIn().then(res => setLogged(res))
+    }, [logged])
 
     const links = mockdata.map((item) => (
         <UnstyledButton className={classes.subLink} key={item.title}>
             <Group noWrap align="flex-start">
                 <ThemeIcon size={34} variant="default" radius="md">
-                    <item.icon size={22} color={theme.fn.primaryColor()} />
+                    <item.icon size={22} color={theme.fn.primaryColor()}/>
                 </ThemeIcon>
                 <div>
                     <Text size="sm" weight={500}>
@@ -121,12 +131,12 @@ export default function HeaderSimple() {
     return (
         <Box>
             <Header height={90} px="md">
-                <Group position="apart" sx={{ height: '100%' }}>
+                <Group position="apart" sx={{height: '100%'}}>
                     <a href="/" className={classes.link}>
-                    <Title order={2}>Career Readiness Portal</Title>
+                        <Title order={3}>Career Readiness Portal</Title>
                     </a>
 
-                    <Group sx={{ height: '100%' }} spacing={0} className={classes.hiddenMobile}>
+                    <Group sx={{height: '100%'}} spacing={0} className={classes.hiddenMobile}>
                         <a href="/jobs" className={classes.link}>
                             Jobs
                         </a>
@@ -137,12 +147,12 @@ export default function HeaderSimple() {
                                         <Box component="span" mr={5}>
                                             Knowledge Centre
                                         </Box>
-                                        <IconChevronDown size={16} color={theme.fn.primaryColor()} />
+                                        <IconChevronDown size={16} color={theme.fn.primaryColor()}/>
                                     </Center>
                                 </a>
                             </HoverCard.Target>
 
-                            <HoverCard.Dropdown sx={{ overflow: 'hidden' }}>
+                            <HoverCard.Dropdown sx={{overflow: 'hidden'}}>
                                 <Group position="apart" px="md">
                                     <Text weight={500}>Features</Text>
                                     <Anchor href="/knowledge-center" size="xs">
@@ -184,11 +194,22 @@ export default function HeaderSimple() {
                     </Group>
 
                     <Group className={classes.hiddenMobile}>
-                        <Button component={"a"} href={"/login"} variant="default">Log in</Button>
-                        <Button component={"a"} href={"/register"}>Sign up</Button>
+                        { !logged &&
+                            <>
+                                <Button component={"a"} href={"/login"} variant="default">Log in</Button>
+                                <Button component={"a"} href={"/register"}>Sign up</Button>
+                            </>
+                        }
+                        {
+                            logged &&
+                            <>
+                                {/*<Button component={"a"} href={"/dashboard"} variant="default">Dashboard</Button>*/}
+                                <Button onClick={async () => await logout(router)}>Log out</Button>
+                            </>
+                        }
                     </Group>
 
-                    <Burger opened={drawerOpened} onClick={toggleDrawer} className={classes.hiddenDesktop} />
+                    <Burger opened={drawerOpened} onClick={toggleDrawer} className={classes.hiddenDesktop}/>
                 </Group>
             </Header>
 
@@ -201,8 +222,8 @@ export default function HeaderSimple() {
                 className={classes.hiddenDesktop}
                 zIndex={1000000}
             >
-                <ScrollArea sx={{ height: 'calc(100vh - 60px)' }} mx="-md">
-                    <Divider my="sm" color={theme.colorScheme === 'dark' ? 'dark.5' : 'gray.1'} />
+                <ScrollArea sx={{height: 'calc(100vh - 60px)'}} mx="-md">
+                    <Divider my="sm" color={theme.colorScheme === 'dark' ? 'dark.5' : 'gray.1'}/>
 
                     <a href="/jobs" className={classes.link}>
                         Jobs
@@ -212,7 +233,7 @@ export default function HeaderSimple() {
                             <Box component="span" mr={5}>
                                 Knowledge Centre
                             </Box>
-                            <IconChevronDown size={16} color={theme.fn.primaryColor()} />
+                            <IconChevronDown size={16} color={theme.fn.primaryColor()}/>
                         </Center>
                     </UnstyledButton>
                     <Collapse in={linksOpened}>{links}</Collapse>
@@ -223,11 +244,23 @@ export default function HeaderSimple() {
                         Resume Builder
                     </a>
 
-                    <Divider my="sm" color={theme.colorScheme === 'dark' ? 'dark.5' : 'gray.1'} />
+                    <Divider my="sm" color={theme.colorScheme === 'dark' ? 'dark.5' : 'gray.1'}/>
 
                     <Group position="center" grow pb="xl" px="md">
-                        <Button component={"a"} href={"/login"} variant="default">Log in</Button>
-                        <Button component={"a"} href={"/register"}>Sign up</Button>
+                        {
+                            !logged &&
+                            <>
+                                <Button component={"a"} href={"/login"} variant="default">Log in</Button>
+                                <Button component={"a"} href={"/register"}>Sign up</Button>
+                            </>
+                        }
+                        {
+                            logged &&
+                            <>
+                                {/*<Button component={"a"} href={"/dashboard"} variant="default">Dashboard</Button>*/}
+                                <Button onClick={async () => await logout(router)}>Log out</Button>
+                            </>
+                        }
                     </Group>
                 </ScrollArea>
             </Drawer>
