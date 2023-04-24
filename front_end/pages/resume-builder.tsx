@@ -278,5 +278,4 @@ export default function ResumeBuilder() {
         </Layout>
     )
 }
-import { IconAt } from '@tabler/icons-react';
 
