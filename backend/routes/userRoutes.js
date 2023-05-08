@@ -16,23 +16,23 @@ router.use(authController.protect);
 
 router.get("/me", userController.getMe, userController.getUser);
 router.patch(
-  "/updateMe",
-  userController.uploadUserPhoto,
-  userController.resizeUserPhoto,
-  userController.updateMe
+    "/updateMe",
+    userController.uploadUserPhoto,
+    userController.resizeUserPhoto,
+    userController.updateMe
 );
 router.delete("/deleteMe", userController.deleteMe);
 
 router.patch("/updateMyPassword", authController.updatePassword);
 
 router
-  .route("/")
-  .get(authController.restrictTo("admin"), userController.getAllUsers)
-  .post(authController.restrictTo("admin"), userController.createUser);
+    .route("/")
+    .get(authController.restrictTo("admin"), userController.getAllUsers)
+    .post(authController.restrictTo("admin"), userController.createUser);
 router
-  .route("/:id")
-  .get(authController.restrictTo("admin"), userController.getUser)
-  .patch(authController.restrictTo("admin"), userController.updateUser)
-  .delete(authController.restrictTo("admin"), userController.deleteUser);
+    .route("/:id")
+    .get(authController.restrictTo("admin"), userController.getUser)
+    .patch(authController.restrictTo("admin"), userController.updateUser)
+    .delete(authController.restrictTo("admin"), userController.deleteUser);
 
 module.exports = router;
