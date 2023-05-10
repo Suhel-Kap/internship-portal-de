@@ -23,7 +23,10 @@ export default function Home() {
                 <LatestTech/>
                 <Divider m={"lg"}/>
                 <Container size={'md'}>
-                    <Center my={"lg"}>
+                    <Center my={"lg"} sx={{
+                        fontSize: 34,
+                        fontWeight: 900,
+                    }}>
                         <Title order={2}>Jobs</Title>
                     </Center>
                     <Grid m={"md"} gutter={"md"}>

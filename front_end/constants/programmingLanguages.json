@@ -1,0 +1,62 @@
+[
+  {
+    "title": "Javascript",
+    "body": "JavaScript (JS) is the most popular lightweight, interpreted compiled programming language. It can be used for both Client-side as well as Server-side developments. JavaScript also known as a scripting language for web pages.",
+    "link": "https://www.geeksforgeeks.org/javascript/"
+  },
+  {
+    "title": "Top 5 Reasons to Learn JavaScript",
+    "body": "Being a developer it is overwhelming to learn multiple languages to build different kinds of applications. Most of the time we need to learn more than one language just to build a single application",
+    "link": "https://www.geeksforgeeks.org/top-5-reasons-to-learn-javascript/"
+  },
+  {
+    "title": "Where to put JavaScript in an HTML Document ?",
+    "body": "Scripts can be placed inside the body or the head section of an HTML page or inside both the head and body. We can also place javascript outside the HTML file which can be linked",
+    "link": "https://www.geeksforgeeks.org/where-to-put-javascript-in-an-html-document/?ref=lbp"
+  },
+  {
+    "title": "Top 5 JavaScript Projects For Beginners",
+    "body": "JavaScript, which is also known as JS, is an object-oriented programming language and is best known as the scripting language for Web pages. It was originally created to make web pages",
+    "link": "https://www.geeksforgeeks.org/top-5-javascript-projects-for-beginners/"
+  },
+  {
+    "title": "Java",
+    "body": "Java is a most popular, object-oriented, widely used programming language and platform that is utilized for Android development, web development, artificial intelligence",
+    "link": "https://www.geeksforgeeks.org/java/"
+  },
+  {
+    "title": "How is Java platform independent?",
+    "body": "The meaning of platform-independent is that the java compiled code(byte code) can run on all operating systems. A program is written in a language that is a",
+    "link": "https://www.geeksforgeeks.org/java-platform-independent/"
+  },
+  {
+    "title": "Differences between JDK, JRE and JVM",
+    "body": "Java Development Kit (JDK) is a software development environment used for developing Java applications and applets. It includes the Java Runtime Environment",
+    "link": "https://www.geeksforgeeks.org/differences-jdk-jre-jvm/"
+  },
+  {
+    "title": "How to Download and Install Eclipse on Windows?",
+    "body": "Eclipse is a free open source platform, Integrated Development Environment (IDE) with the help of which applications are made using the Java programming languages",
+    "link": "https://www.geeksforgeeks.org/how-to-download-and-install-eclipse-on-windows/"
+  },
+  {
+    "title": "Python",
+    "body": "Python is a high-level, general-purpose, and very popular programming language. Python programming language (latest Python 3) is being used in web development, Machine Learning",
+    "link": "https://www.geeksforgeeks.org/python-programming-language/"
+  },
+  {
+    "title": "Python – The new generation Language",
+    "body": "Python is a widely-used, high-level programming language known for its simplicity, readability, and versatility. It is often used in scientific computing, data analysis",
+    "link": "https://www.geeksforgeeks.org/python-the-new-generation-language/"
+  },
+  {
+    "title": "Python - Decision Making",
+    "body": "There comes situations in real life when we need to make some decisions and based on these decisions, we decide what should we do next. Similar situations arise in",
+    "link": "https://www.geeksforgeeks.org/python-if-else/"
+  },
+  {
+    "title": "Python Language advantages and applications",
+    "body": "Python is a high-level, interpreted, and general-purpose dynamic programming language that focuses on code readability. It generally has small programs when compared to",
+    "link": "https://www.geeksforgeeks.org/python-language-advantages-applications/"
+  }
+]

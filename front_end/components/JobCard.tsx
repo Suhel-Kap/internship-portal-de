@@ -1,9 +1,11 @@
-import { IconHeart } from '@tabler/icons';
-import { Card, Image, Text, Group, Badge, Button, ActionIcon, createStyles } from '@mantine/core';
+import {IconHeart} from '@tabler/icons';
+import {Card, Image, Text, Group, Badge, Button, ActionIcon, createStyles} from '@mantine/core';
 
 const useStyles = createStyles((theme) => ({
     card: {
         backgroundColor: theme.colorScheme === 'dark' ? theme.colors.dark[7] : theme.white,
+        height: "100%",
+        position: "relative"
     },
 
     section: {
@@ -31,8 +33,8 @@ interface BadgeCardProps {
     description: string;
 }
 
-export function JobCard({ title, description, location, link}: BadgeCardProps) {
-    const { classes, theme } = useStyles();
+export function JobCard({title, description, location, link}: BadgeCardProps) {
+    const {classes, theme} = useStyles();
 
     return (
         <Card withBorder radius="md" p="md" className={classes.card}>
@@ -47,25 +49,19 @@ export function JobCard({ title, description, location, link}: BadgeCardProps) {
                     </Text>
                     <Badge size="sm">{location}</Badge>
                 </Group>
+            </Card.Section>
+
+            <Card.Section className={classes.section}>
                 <Text size="sm" mt="xs">
                     {description}
                 </Text>
             </Card.Section>
 
-            {/*<Card.Section className={classes.section}>*/}
-            {/*    <Text mt="md" className={classes.label} color="dimmed">*/}
-            {/*        Perfect for you, if you enjoy*/}
-            {/*    </Text>*/}
-            {/*    <Group spacing={7} mt={5}>*/}
-            {/*        {features}*/}
-            {/*    </Group>*/}
-            {/*</Card.Section>*/}
-
-            <Group mt="xs">
-                <Button component={"a"} href={link} target={"_blank"} radius="md" style={{ flex: 1 }}>
+            <Card.Section style={{position: "absolute", bottom: 16, width: "100%"}}>
+                <Button fullWidth component={"a"} href={link} target={"_blank"} radius="md" style={{position: "absolute", bottom: 0, borderTopLeftRadius: 0, borderTopRightRadius: 0}}>
                     Show details
                 </Button>
-            </Group>
+            </Card.Section>
         </Card>
     );
 }
