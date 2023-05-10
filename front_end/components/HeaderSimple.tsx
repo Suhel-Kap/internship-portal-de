@@ -18,7 +18,7 @@ import {
     ScrollArea,
     Title,
 } from "@mantine/core";
-import { useDisclosure } from "@mantine/hooks";
+import {useDisclosure} from "@mantine/hooks";
 import {
     IconNotification,
     IconCode,
@@ -28,10 +28,10 @@ import {
     IconCoin,
     IconChevronDown,
 } from "@tabler/icons";
-import { useEffect, useState } from "react";
-import { isLoggedIn } from "../utils/isLoggedIn";
-import { logout } from "../utils/logout";
-import { useRouter } from "next/router";
+import {useEffect, useState} from "react";
+import {isLoggedIn} from "../utils/isLoggedIn";
+import {logout} from "../utils/logout";
+import {useRouter} from "next/router";
 
 const useStyles = createStyles((theme) => ({
     link: {
@@ -138,11 +138,11 @@ const mockdata = [
 ];
 
 export default function HeaderSimple() {
-    const [drawerOpened, { toggle: toggleDrawer, close: closeDrawer }] =
+    const [drawerOpened, {toggle: toggleDrawer, close: closeDrawer}] =
         useDisclosure(false);
-    const [linksOpened, { toggle: toggleLinks }] = useDisclosure(false);
+    const [linksOpened, {toggle: toggleLinks}] = useDisclosure(false);
     const [logged, setLogged] = useState(false);
-    const { classes, theme } = useStyles();
+    const {classes, theme} = useStyles();
     const router = useRouter();
 
     useEffect(() => {
@@ -153,7 +153,7 @@ export default function HeaderSimple() {
         <UnstyledButton className={classes.subLink} key={item.title}>
             <Group noWrap align="flex-start">
                 <ThemeIcon size={34} variant="default" radius="md">
-                    <item.icon size={22} color={theme.fn.primaryColor()} />
+                    <item.icon size={22} color={theme.fn.primaryColor()}/>
                 </ThemeIcon>
                 <div>
                     <Text size="sm" weight={500}>
@@ -170,83 +170,22 @@ export default function HeaderSimple() {
     return (
         <Box>
             <Header height={90} px="md">
-                <Group position="apart" sx={{ height: "100%" }}>
+                <Group position="apart" sx={{height: "100%"}}>
                     <a href="/" className={classes.link}>
                         <Title order={3}>Career Readiness Portal</Title>
                     </a>
 
                     <Group
-                        sx={{ height: "100%" }}
+                        sx={{height: "100%"}}
                         spacing={0}
                         className={classes.hiddenMobile}
                     >
                         <a href="/jobs" className={classes.link}>
                             Jobs
                         </a>
-                        <HoverCard
-                            width={600}
-                            position="bottom"
-                            radius="md"
-                            shadow="md"
-                            withinPortal
-                        >
-                            <HoverCard.Target>
-                                <a
-                                    href="/knowledge-center"
-                                    className={classes.link}
-                                >
-                                    <Center inline>
-                                        <Box component="span" mr={5}>
-                                            Knowledge Centre
-                                        </Box>
-                                        <IconChevronDown
-                                            size={16}
-                                            color={theme.fn.primaryColor()}
-                                        />
-                                    </Center>
-                                </a>
-                            </HoverCard.Target>
-
-                            <HoverCard.Dropdown sx={{ overflow: "hidden" }}>
-                                <Group position="apart" px="md">
-                                    <Text weight={500}>Features</Text>
-                                    <Anchor href="/knowledge-center" size="xs">
-                                        View all
-                                    </Anchor>
-                                </Group>
-
-                                <Divider
-                                    my="sm"
-                                    mx="-md"
-                                    color={
-                                        theme.colorScheme === "dark"
-                                            ? "dark.5"
-                                            : "gray.1"
-                                    }
-                                />
-
-                                <SimpleGrid cols={2} spacing={0}>
-                                    {links}
-                                </SimpleGrid>
-
-                                <div className={classes.dropdownFooter}>
-                                    <Group position="apart">
-                                        <div>
-                                            <Text weight={500} size="sm">
-                                                Get started
-                                            </Text>
-                                            <Text size="xs" color="dimmed">
-                                                Their food sources have
-                                                decreased, and their numbers
-                                            </Text>
-                                        </div>
-                                        <Button variant="default">
-                                            Get started
-                                        </Button>
-                                    </Group>
-                                </div>
-                            </HoverCard.Dropdown>
-                        </HoverCard>
+                        <a href="/knowledge-center" className={classes.link}>
+                            Knowledge Centre
+                        </a>
                         <a href="/interview-prep" className={classes.link}>
                             Interview Preparation
                         </a>
@@ -302,7 +241,7 @@ export default function HeaderSimple() {
                 className={classes.hiddenDesktop}
                 zIndex={1000000}
             >
-                <ScrollArea sx={{ height: "calc(100vh - 60px)" }} mx="-md">
+                <ScrollArea sx={{height: "calc(100vh - 60px)"}} mx="-md">
                     <Divider
                         my="sm"
                         color={
