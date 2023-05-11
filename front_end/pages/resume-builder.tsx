@@ -101,12 +101,12 @@ export default function ResumeBuilder() {
                     : "Please enter your summary in (1-100 characters)",
             skill: (value) =>
                 value.length > 1 ||
-                (value.length === 1 && value[0].name.trim().length > 0)
+                    (value.length === 1 && value[0].name.trim().length > 0)
                     ? null
                     : "Please enter your skills",
             languages: (value) =>
                 value.length > 1 ||
-                (value.length === 1 && value[0].name.trim().length > 0)
+                    (value.length === 1 && value[0].name.trim().length > 0)
                     ? null
                     : "Please enter your language",
         },
@@ -235,7 +235,7 @@ export default function ResumeBuilder() {
                                 <td>
                                     <TextInput
                                         label="COUNTRY"
-                                        maw={130}
+                                        maw={90}
                                         mx="auto"
                                         placeholder="e.g. india"
                                         required
@@ -245,7 +245,7 @@ export default function ResumeBuilder() {
                                 <td>
                                     <TextInput
                                         label="PIN CODE"
-                                        maw={130}
+                                        maw={90}
                                         mx="auto"
                                         placeholder="e.g. 110034"
                                         required
@@ -279,12 +279,12 @@ export default function ResumeBuilder() {
 
                         <Title order={4}>Tell us about your education</Title>
                         <Table>
-                            <tr>
+                            <tr >
                                 <td>
                                     <TextInput
                                         label="SCHOOL NAME"
                                         maw={320}
-                                        mx="auto"
+                                        mx={70}
                                         placeholder="e.g. Sarvajanik College of Engineering and Technology"
                                         required
                                         {...form.getInputProps("schoolName")}
@@ -294,7 +294,7 @@ export default function ResumeBuilder() {
                                     <TextInput
                                         label="SCHOOL LOCATION"
                                         maw={320}
-                                        mx="auto"
+                                        mx={40}
                                         placeholder="e.g. Surat,Gujarat"
                                         required
                                         {...form.getInputProps(
@@ -304,11 +304,11 @@ export default function ResumeBuilder() {
                                 </td>
                             </tr>
                             <tr>
-                                <td>
+                                <td colSpan={3}>
                                     <Select
                                         required
                                         maw={320}
-                                        mx="auto"
+                                        mx={70}
                                         label="DEGREE"
                                         placeholder="BE"
                                         data={[
@@ -339,17 +339,17 @@ export default function ResumeBuilder() {
                                     <TextInput
                                         label="FIELD OF STUDY"
                                         maw={320}
-                                        mx="auto"
+                                        mx={70}
                                         placeholder="e.g. Financial Accounting"
                                         required
                                         {...form.getInputProps("fieldOfStudy")}
                                     />
                                 </td>
-                                <td>
+                                <td colSpan={2}>
                                     <DatePicker
                                         label="Date"
                                         maw={320}
-                                        mx="auto"
+                                        mx={40}
                                         placeholder="Date"
                                         required
                                         {...form.getInputProps(
@@ -366,7 +366,7 @@ export default function ResumeBuilder() {
                                     <TextInput
                                         label="WHAT WAS YOUR TITLE?"
                                         maw={320}
-                                        mx="auto"
+                                        mx={70}
                                         placeholder="Devops Engineering"
                                         {...form.getInputProps("expTitle")}
                                     />
@@ -375,7 +375,7 @@ export default function ResumeBuilder() {
                                     <TextInput
                                         label="WHO DID YOU DO THIS FOR?"
                                         maw={320}
-                                        mx="auto"
+                                        mx={70}
                                         placeholder="Google"
                                         {...form.getInputProps("expCompany")}
                                     />
@@ -394,7 +394,7 @@ export default function ResumeBuilder() {
                                 <td>
                                     <TextInput
                                         label="COUNTRY"
-                                        maw={100}
+                                        maw={90}
                                         mx="auto"
                                         placeholder="e.g. india"
                                         {...form.getInputProps("expCountry")}
@@ -403,7 +403,7 @@ export default function ResumeBuilder() {
                                 <td>
                                     <TextInput
                                         label="PIN CODE"
-                                        maw={100}
+                                        maw={90}
                                         mx="auto"
                                         placeholder="e.g. 110034"
                                         {...form.getInputProps("expPinCode")}
@@ -431,9 +431,8 @@ export default function ResumeBuilder() {
                                 </td>
                             </tr>
                             <tr>
-                                <td colSpan={2}></td>
-                                <td colSpan={2}>
-                                    <Checkbox label="I am currenty work here" />
+                                <td>
+                                    <Checkbox mx={70} label="I am currenty work here" />
                                 </td>
                             </tr>
                         </Table>
@@ -441,78 +440,102 @@ export default function ResumeBuilder() {
                         <Title order={4}>
                             What skills would you like to highlight?
                         </Title>
-                        <Box maw={500} mx="auto">
-                            <Group mb="xs">
-                                <Text
-                                    weight={500}
-                                    size="sm"
-                                    sx={{ flex: 1 }}
-                                    {...(form.isValid("skill")
-                                        ? {}
-                                        : { color: "red" })}
-                                >
-                                    Skills{" "}
-                                    {form.isValid("skill")
-                                        ? ""
-                                        : "(add at least one skill)"}
-                                </Text>
-                            </Group>
+                        <Table>
+                            <tr>
+                                <td>
+                                    <Box mx={70}>
+                                        <Group mb="xs">
+                                            <Text
+                                                weight={500}
+                                                size="sm"
+                                                sx={{ flex: 1 }}
+                                                {...(form.isValid("skill")
+                                                    ? {}
+                                                    : { color: "red" })}
+                                            >
+                                                Skills{" "}
+                                                {form.isValid("skill")
+                                                    ? ""
+                                                    : "(add at least one skill)"}
+                                            </Text>
+                                        </Group>
+                                        {skills}
+                                    </Box>
+                                </td>
+                                <td>
+                                    <Box mx={90}>
 
-                            {skills}
-
-                            <Group position="center" mt="md">
-                                <Button
-                                    onClick={() =>
-                                        form.insertListItem("skill", {
-                                            name: "",
-                                            key: randomId(),
-                                        })
-                                    }
-                                >
-                                    Add Skill
-                                </Button>
-                            </Group>
-                        </Box>
+                                        <Group position="center" mt="md">
+                                            <Button
+                                                onClick={() =>
+                                                    form.insertListItem("skill", {
+                                                        name: "",
+                                                        key: randomId(),
+                                                    })
+                                                }
+                                            >
+                                                Add Skill
+                                            </Button>
+                                        </Group>
+                                    </Box>
+                                </td>
+                            </tr>
+                        </Table>
                         <Title order={4}>Summary</Title>
                         <Textarea
                             placeholder="Write your summery here"
+                            mx={70}
                             label="Briefly tell us about your background"
                             required
                             {...form.getInputProps("summary")}
                         />
                         <Title order={4}>Add languages you know</Title>
-                        <Box maw={500} mx="auto">
-                            <Group mb="xs">
-                                <Text
-                                    weight={500}
-                                    size="sm"
-                                    sx={{ flex: 1 }}
-                                    {...(form.isValid("languages")
-                                        ? {}
-                                        : { color: "red" })}
-                                >
-                                    Languages{" "}
-                                    {form.isValid("languages")
-                                        ? ""
-                                        : "(add at least one language)"}
-                                </Text>
-                            </Group>
+                        <Table>
+                            <tr>
+                                <td>
+                                    <Box mx={70}>
+                                        <Group mb="xs">
+                                            <Text
+                                                weight={500}
+                                                size="sm"
+                                                sx={{ flex: 1 }}
+                                                {...(form.isValid("languages")
+                                                    ? {}
+                                                    : { color: "red" })}
+                                            >
+                                                Languages{" "}
+                                                {form.isValid("languages")
+                                                    ? ""
+                                                    : "(add at least one language)"}
+                                            </Text>
+                                        </Group>
+                                        {fields}
+                                    </Box>
+                                </td>
+                                <td>
+                                    <Box mx={70}>
 
-                            {fields}
 
-                            <Group position="center" mt="md">
-                                <Button
-                                    onClick={() =>
-                                        form.insertListItem("languages", {
-                                            name: "",
-                                            key: randomId(),
-                                        })
-                                    }
-                                >
-                                    Add language
-                                </Button>
-                            </Group>
-                            <Group position="center" mt="md">
+                                        <Group position="center" mt="md">
+                                            <Button
+                                                onClick={() =>
+                                                    form.insertListItem("languages", {
+                                                        name: "",
+                                                        key: randomId(),
+                                                    })
+                                                }
+                                            >
+                                                Add language
+                                            </Button>
+                                        </Group>
+                                    </Box>
+                                </td>
+                            </tr>
+                        </Table>
+
+
+                        <Box mx="auto">
+                            <Group position="center" mt="xl">
                                 <Button type="submit">Submit</Button>
                             </Group>
                         </Box>
