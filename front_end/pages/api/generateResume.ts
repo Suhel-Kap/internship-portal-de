@@ -56,150 +56,156 @@ export default async function handler(
 
         if (resJson.status === "error") {
             console.log("error");
+            res.status(500).send("Internal Server Error");
         }
 
-        patchDocument(fs.readFileSync("assets/resume.docx"), {
-            patches: {
-                name: {
-                    type: PatchType.PARAGRAPH,
-                    children: [
-                        new TextRun(
-                            requestBody.firstName + " " + requestBody.lastName
-                        ),
-                    ],
+        patchDocument(
+            fs.readFileSync("assets/resume" + requestBody.resumeType + ".docx"),
+            {
+                patches: {
+                    name: {
+                        type: PatchType.PARAGRAPH,
+                        children: [
+                            new TextRun(
+                                requestBody.firstName +
+                                    " " +
+                                    requestBody.lastName
+                            ),
+                        ],
+                    },
+                    city: {
+                        type: PatchType.PARAGRAPH,
+                        children: [new TextRun(requestBody.city)],
+                    },
+                    pinCode: {
+                        type: PatchType.PARAGRAPH,
+                        children: [new TextRun(requestBody.pinCode)],
+                    },
+                    country: {
+                        type: PatchType.PARAGRAPH,
+                        children: [new TextRun(requestBody.country)],
+                    },
+                    email: {
+                        type: PatchType.PARAGRAPH,
+                        children: [new TextRun(requestBody.email)],
+                    },
+                    phone: {
+                        type: PatchType.PARAGRAPH,
+                        children: [new TextRun(requestBody.phone)],
+                    },
+                    schoolName: {
+                        type: PatchType.PARAGRAPH,
+                        children: [new TextRun(requestBody.schoolName)],
+                    },
+                    schoolLocation: {
+                        type: PatchType.PARAGRAPH,
+                        children: [new TextRun(requestBody.schoolLocation)],
+                    },
+                    degree: {
+                        type: PatchType.PARAGRAPH,
+                        children: [new TextRun(requestBody.degree)],
+                    },
+                    fieldOfStudy: {
+                        type: PatchType.PARAGRAPH,
+                        children: [new TextRun(requestBody.fieldOfStudy)],
+                    },
+                    schoolStartDate: {
+                        type: PatchType.PARAGRAPH,
+                        children: [
+                            new TextRun(
+                                new Date(
+                                    requestBody.schoolStartDate
+                                ).toLocaleDateString()
+                            ),
+                        ],
+                    },
+                    expTitle: {
+                        type: PatchType.PARAGRAPH,
+                        children: [
+                            new TextRun(
+                                requestBody.expTitle == ""
+                                    ? "Title"
+                                    : requestBody.expTitle
+                            ),
+                        ],
+                    },
+                    expCompany: {
+                        type: PatchType.PARAGRAPH,
+                        children: [
+                            new TextRun(
+                                requestBody.expCompany == ""
+                                    ? "Company"
+                                    : requestBody.expCompany
+                            ),
+                        ],
+                    },
+                    expCountry: {
+                        type: PatchType.PARAGRAPH,
+                        children: [
+                            new TextRun(
+                                requestBody.expCountry == ""
+                                    ? "Country"
+                                    : requestBody.expCountry
+                            ),
+                        ],
+                    },
+                    expCity: {
+                        type: PatchType.PARAGRAPH,
+                        children: [
+                            new TextRun(
+                                requestBody.expCity == ""
+                                    ? "City"
+                                    : requestBody.expCity
+                            ),
+                        ],
+                    },
+                    expStartDate: {
+                        type: PatchType.PARAGRAPH,
+                        children: [
+                            new TextRun(
+                                new Date(
+                                    requestBody.expStartDate
+                                ).toLocaleDateString()
+                            ),
+                        ],
+                    },
+                    expEndDate: {
+                        type: PatchType.PARAGRAPH,
+                        children: [
+                            new TextRun(
+                                new Date(
+                                    requestBody.expEndDate
+                                ).toLocaleDateString()
+                            ),
+                        ],
+                    },
+                    languages: {
+                        type: PatchType.PARAGRAPH,
+                        children: [
+                            new TextRun(
+                                requestBody.languages
+                                    .map((language: any) => language.name)
+                                    .toLocaleString()
+                            ),
+                        ],
+                    },
+                    skills: {
+                        type: PatchType.PARAGRAPH,
+                        children: [
+                            new TextRun(
+                                requestBody.skill
+                                    .map((skill: any) => skill.name)
+                                    .toLocaleString()
+                            ),
+                        ],
+                    },
+                    summary: {
+                        type: PatchType.PARAGRAPH,
+                        children: [new TextRun(requestBody.summary)],
+                    },
                 },
-                city: {
-                    type: PatchType.PARAGRAPH,
-                    children: [new TextRun(requestBody.city)],
-                },
-                pinCode: {
-                    type: PatchType.PARAGRAPH,
-                    children: [new TextRun(requestBody.pinCode)],
-                },
-                country: {
-                    type: PatchType.PARAGRAPH,
-                    children: [new TextRun(requestBody.country)],
-                },
-                email: {
-                    type: PatchType.PARAGRAPH,
-                    children: [new TextRun(requestBody.email)],
-                },
-                phone: {
-                    type: PatchType.PARAGRAPH,
-                    children: [new TextRun(requestBody.phone)],
-                },
-                schoolName: {
-                    type: PatchType.PARAGRAPH,
-                    children: [new TextRun(requestBody.schoolName)],
-                },
-                schoolLocation: {
-                    type: PatchType.PARAGRAPH,
-                    children: [new TextRun(requestBody.schoolLocation)],
-                },
-                degree: {
-                    type: PatchType.PARAGRAPH,
-                    children: [new TextRun(requestBody.degree)],
-                },
-                fieldOfStudy: {
-                    type: PatchType.PARAGRAPH,
-                    children: [new TextRun(requestBody.fieldOfStudy)],
-                },
-                schoolStartDate: {
-                    type: PatchType.PARAGRAPH,
-                    children: [
-                        new TextRun(
-                            new Date(
-                                requestBody.schoolStartDate
-                            ).toLocaleDateString()
-                        ),
-                    ],
-                },
-                expTitle: {
-                    type: PatchType.PARAGRAPH,
-                    children: [
-                        new TextRun(
-                            requestBody.expTitle == ""
-                                ? "Title"
-                                : requestBody.expTitle
-                        ),
-                    ],
-                },
-                expCompany: {
-                    type: PatchType.PARAGRAPH,
-                    children: [
-                        new TextRun(
-                            requestBody.expCompany == ""
-                                ? "Company"
-                                : requestBody.expCompany
-                        ),
-                    ],
-                },
-                expCountry: {
-                    type: PatchType.PARAGRAPH,
-                    children: [
-                        new TextRun(
-                            requestBody.expCountry == ""
-                                ? "Country"
-                                : requestBody.expCountry
-                        ),
-                    ],
-                },
-                expCity: {
-                    type: PatchType.PARAGRAPH,
-                    children: [
-                        new TextRun(
-                            requestBody.expCity == ""
-                                ? "City"
-                                : requestBody.expCity
-                        ),
-                    ],
-                },
-                expStartDate: {
-                    type: PatchType.PARAGRAPH,
-                    children: [
-                        new TextRun(
-                            new Date(
-                                requestBody.expStartDate
-                            ).toLocaleDateString()
-                        ),
-                    ],
-                },
-                expEndDate: {
-                    type: PatchType.PARAGRAPH,
-                    children: [
-                        new TextRun(
-                            new Date(
-                                requestBody.expEndDate
-                            ).toLocaleDateString()
-                        ),
-                    ],
-                },
-                languages: {
-                    type: PatchType.PARAGRAPH,
-                    children: [
-                        new TextRun(
-                            requestBody.languages
-                                .map((language: any) => language.name)
-                                .toLocaleString()
-                        ),
-                    ],
-                },
-                skills: {
-                    type: PatchType.PARAGRAPH,
-                    children: [
-                        new TextRun(
-                            requestBody.skill
-                                .map((skill: any) => skill.name)
-                                .toLocaleString()
-                        ),
-                    ],
-                },
-                summary: {
-                    type: PatchType.PARAGRAPH,
-                    children: [new TextRun(requestBody.summary)],
-                },
-            },
-        }).then((doc) => {
+            }
+        ).then((doc) => {
             // console.log("doc", doc);
             res.status(200).send(doc);
             // fs.writeFileSync("My Document.docx", doc);
