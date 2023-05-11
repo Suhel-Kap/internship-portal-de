@@ -16,6 +16,9 @@ export async function logout(router: NextRouter) {
         deleteCookie("crp_login_token", {
             path: "/",
         })
+        deleteCookie("email", {
+            path: "/",
+        })
         await router.push("/login")
         return true
     } catch (e){

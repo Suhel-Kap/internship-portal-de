@@ -124,6 +124,7 @@ const userSchema = new mongoose.Schema({
 const UserData = mongoose.model("UserData", userSchema);
 
 app.route("/addDetail/:email").get((req, res) => {
+    console.log("req.params.email", req.params.email)
     UserData.findOne({ email: req.params.email }, (err, data) => {
         if (err) {
             console.log("Can't find user data: ", err);

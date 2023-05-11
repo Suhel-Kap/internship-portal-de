@@ -77,6 +77,7 @@ export default function LoginPage() {
         if (resJson.status === "success") {
             const token = resJson.token
             setCookie('crp_login_token', token, {path: '/'})
+            setCookie('email', email, {path: '/'})
             showNotification({
                 title: 'Login Successful',
                 message: 'You have successfully logged in',

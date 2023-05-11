@@ -122,29 +122,34 @@ export default function Registration() {
             alert("Passwords do not match")
             return
         }
-        const response = await fetch("http://localhost:4000/api/v1/users/signup", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-                "Access-Control-Allow-Origin": "*",
-                "Access-Control-Allow-Methods": "GET,PUT,POST,DELETE,PATCH,OPTIONS",
-                "Access-Control-Allow-Headers": "Content-Type, Authorization, Content-Length, X-Requested-With",
-            },
-            body: JSON.stringify({
-                "firstname": fname,
-                "lastname": lname,
-                "email": email,
-                "password": password,
-                "passwordConfirm": confirmPassword
+        try{
+            const response = await fetch("http://localhost:4000/api/v1/users/signup", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                    "Access-Control-Allow-Origin": "*",
+                    "Access-Control-Allow-Methods": "GET,PUT,POST,DELETE,PATCH,OPTIONS",
+                    "Access-Control-Allow-Headers": "Content-Type, Authorization, Content-Length, X-Requested-With",
+                },
+                body: JSON.stringify({
+                    "firstname": fname,
+                    "lastname": lname,
+                    "email": email,
+                    "password": password,
+                    "passwordConfirm": confirmPassword
+                })
             })
-        })
-        const resJson = (await response.json())
-        // store token in cookies
-        const token = resJson.token
-        setCookie('crp_login_token', token, {path: '/'})
-
-
-        await router.push('/')
+            const resJson = (await response.json())
+            // store token in cookies
+            const token = resJson.token
+            setCookie('crp_login_token', token, {path: '/'})
+            setCookie('email', email, {path: '/'})
+    
+    
+            await router.push('/')
+        } catch (e){
+            alert("Error signing up")
+        }
     }
 
     return (
