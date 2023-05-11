@@ -1,11 +1,12 @@
 import Layout from "../components/Layout";
-import { Checkbox, Container, Grid, Title } from "@mantine/core";
-import { JobCard } from "../components/JobCard";
-import { JOB_DATA } from "../constants";
+import {Checkbox, Container, Grid, Title} from "@mantine/core";
+import {JobCard} from "../components/JobCard";
+import {JOB_DATA} from "../constants";
 import Head from "next/head";
-import { useEffect, useState } from "react";
-import { isLoggedIn } from "../utils/isLoggedIn";
-import { getCookie } from "cookies-next";
+import {useEffect, useState} from "react";
+import {isLoggedIn} from "../utils/isLoggedIn";
+import {getCookie} from "cookies-next";
+import {showNotification} from "@mantine/notifications";
 
 export default function Jobs() {
   const [logged, setLogged] = useState(false);
@@ -24,9 +25,6 @@ export default function Jobs() {
 
   const getSkills = async () => {
     const email = getCookie("email");
-    const token = getCookie("crp_login_token", {
-      path: "/",
-    });
     // fetch by passing token
     const res = await fetch("http://localhost:4000/addDetail/" + email, {
       method: "GET",
@@ -35,14 +33,25 @@ export default function Jobs() {
         "Access-Control-Allow-Origin": "*",
         "Access-Control-Allow-Methods": "GET,PUT,POST,DELETE,PATCH,OPTIONS",
         "Access-Control-Allow-Headers":
-          "Content-Type, Authorization, Content-Length, X-Requested-With",
+            "Content-Type, Authorization, Content-Length, X-Requested-With",
       },
     });
-    const data = await res.json();
-    console.log(data);
-    const skills = data.skill.map((skill: any) => skill.name);
-    console.log(skills);
-    setUserSkills(skills);
+    try {
+      const data = await res.json();
+      console.log(data);
+
+      const skills = data.skill.map((skill: any) => skill.name);
+      console.log(skills);
+      setUserSkills(skills);
+    } catch (e) {
+      showNotification({
+        title: 'Error',
+        message: 'Make sure you have created your resume first',
+        color: "red",
+      })
+      console.log(e)
+    }
+
   };
   const filteredJobs = customJobs
     ? JOB_DATA.filter((job) =>

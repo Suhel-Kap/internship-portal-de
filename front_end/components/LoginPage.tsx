@@ -1,14 +1,4 @@
-import {
-    Paper,
-    createStyles,
-    TextInput,
-    PasswordInput,
-    Checkbox,
-    Button,
-    Title,
-    Text,
-    Anchor,
-} from '@mantine/core';
+import {Anchor, Button, Checkbox, createStyles, Paper, PasswordInput, Text, TextInput, Title,} from '@mantine/core';
 import {setCookie} from "cookies-next";
 import {useInputState} from "@mantine/hooks";
 import {showNotification} from "@mantine/notifications";
@@ -74,6 +64,7 @@ export default function LoginPage() {
             })
         })
         const resJson = (await response.json())
+        console.log(resJson)
         if (resJson.status === "success") {
             const token = resJson.token
             setCookie('crp_login_token', token, {path: '/'})
@@ -89,6 +80,7 @@ export default function LoginPage() {
             showNotification({
                 title: 'Error',
                 message: 'An error occurred while logging in. Make sure you have entered the correct credentials.',
+                color: "red",
             })
         }
 
