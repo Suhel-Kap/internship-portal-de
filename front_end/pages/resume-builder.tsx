@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import Layout from "../components/Layout";
-import { Container, Title } from "@mantine/core";
+import { Container, Image, Modal, Stack, Title } from "@mantine/core";
 import {
     Input,
     Text,
@@ -20,9 +20,17 @@ import { useForm } from "@mantine/form";
 import { TextInput, Switch, ActionIcon, Box, Code } from "@mantine/core";
 import { randomId } from "@mantine/hooks";
 import { IconTrash } from "@tabler/icons-react";
+
+const resumeTypes = [
+    { value: "1", label: "Type 1" },
+    { value: "2", label: "Type 2" },
+    { value: "3", label: "Type 3" },
+    { value: "4", label: "Type 4" },
+    { value: "5", label: "Type 5" },
+];
 export default function ResumeBuilder() {
     const [mounted, setMounted] = useState(false);
-
+    const [modalOpened, setModalOpened] = useState(false);
     const form = useForm({
         validateInputOnChange: true,
         initialValues: {
@@ -49,6 +57,7 @@ export default function ResumeBuilder() {
             summary: "",
             languages: [{ name: "", key: randomId() }],
             skill: [{ name: "", key: randomId() }],
+            resumeType: "1",
         },
         validate: {
             firstName: (value) =>
@@ -516,26 +525,49 @@ export default function ResumeBuilder() {
                                     <Box mx={70}>
 
 
-                                        <Group position="center" mt="md">
-                                            <Button
-                                                onClick={() =>
-                                                    form.insertListItem("languages", {
-                                                        name: "",
-                                                        key: randomId(),
-                                                    })
-                                                }
-                                            >
-                                                Add language
-                                            </Button>
-                                        </Group>
-                                    </Box>
-                                </td>
-                            </tr>
-                        </Table>
+                            <Group position="center" mt="md">
+                                <Button
+                                    onClick={() =>
+                                        form.insertListItem("languages", {
+                                            name: "",
+                                            key: randomId(),
+                                        })
+                                    }
+                                >
+                                    Add language
+                                </Button>
+                            </Group>
 
-
-                        <Box mx="auto">
-                            <Group position="center" mt="xl">
+                            <Group position="center" mt="md">
+                                <Select
+                                    label="Resume Type"
+                                    placeholder="Pick one"
+                                    data={resumeTypes}
+                                    {...form.getInputProps("resumeType")}
+                                />
+                                <Button
+                                    sx={{ alignSelf: "flex-end" }}
+                                    onClick={() => {
+                                        setModalOpened(true);
+                                    }}
+                                >
+                                    Preview
+                                </Button>
+                                <Modal
+                                    opened={modalOpened}
+                                    onClose={() => setModalOpened(false)}
+                                    title="Resume Type Preview"
+                                >
+                                    <Image
+                                        src={
+                                            "resume" +
+                                            form.values.resumeType +
+                                            ".webp"
+                                        }
+                                    />
+                                </Modal>
+                            </Group>
+                            <Group position="center" mt="md">
                                 <Button type="submit">Submit</Button>
                             </Group>
                         </Box>
