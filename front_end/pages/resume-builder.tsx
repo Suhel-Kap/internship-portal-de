@@ -213,7 +213,7 @@ export default function ResumeBuilder() {
                                     <TextInput
                                         label="FIRST NAME"
                                         maw={320}
-                                        mx="auto"
+                                        mx={70}
                                         placeholder="First Name"
                                         required
                                         {...form.getInputProps("firstName")}
@@ -223,7 +223,7 @@ export default function ResumeBuilder() {
                                     <TextInput
                                         label="LAST NAME"
                                         maw={320}
-                                        mx="auto"
+                                        mx={70}
                                         placeholder="Last Name"
                                         required
                                         {...form.getInputProps("lastName")}
@@ -235,7 +235,7 @@ export default function ResumeBuilder() {
                                     <TextInput
                                         label="CITY"
                                         maw={320}
-                                        mx="auto"
+                                        mx={70}
                                         placeholder="City"
                                         required
                                         {...form.getInputProps("city")}
@@ -267,7 +267,7 @@ export default function ResumeBuilder() {
                                     <TextInput
                                         label="PHONE"
                                         maw={320}
-                                        mx="auto"
+                                        mx={70}
                                         placeholder="e.g. +91 12345 67890"
                                         required
                                         {...form.getInputProps("phone")}
@@ -278,7 +278,7 @@ export default function ResumeBuilder() {
                                         label="EMAIL"
                                         required
                                         maw={320}
-                                        mx="auto"
+                                        mx={70}
                                         placeholder="e.g. abc123@gmail.com"
                                         {...form.getInputProps("email")}
                                     />
@@ -303,7 +303,7 @@ export default function ResumeBuilder() {
                                     <TextInput
                                         label="SCHOOL LOCATION"
                                         maw={320}
-                                        mx={40}
+                                        mx={45}
                                         placeholder="e.g. Surat,Gujarat"
                                         required
                                         {...form.getInputProps(
@@ -358,7 +358,7 @@ export default function ResumeBuilder() {
                                     <DatePicker
                                         label="Date"
                                         maw={320}
-                                        mx={40}
+                                        mx={45}
                                         placeholder="Date"
                                         required
                                         {...form.getInputProps(
@@ -395,7 +395,7 @@ export default function ResumeBuilder() {
                                     <TextInput
                                         label="CITY"
                                         maw={320}
-                                        mx="auto"
+                                        mx={70}
                                         placeholder="City"
                                         {...form.getInputProps("expCity")}
                                     />
@@ -424,7 +424,7 @@ export default function ResumeBuilder() {
                                     <DatePicker
                                         label="START DATE"
                                         maw={320}
-                                        mx="auto"
+                                        mx={70}
                                         placeholder="start date"
                                         {...form.getInputProps("expStartDate")}
                                     />
@@ -433,7 +433,7 @@ export default function ResumeBuilder() {
                                     <DatePicker
                                         label="END DATE"
                                         maw={320}
-                                        mx="auto"
+                                        mx={70}
                                         placeholder="end date"
                                         {...form.getInputProps("expEndDate")}
                                     />
@@ -525,52 +525,62 @@ export default function ResumeBuilder() {
                                     <Box mx={70}>
 
 
-                            <Group position="center" mt="md">
-                                <Button
-                                    onClick={() =>
-                                        form.insertListItem("languages", {
-                                            name: "",
-                                            key: randomId(),
-                                        })
-                                    }
-                                >
-                                    Add language
-                                </Button>
-                            </Group>
+                                        <Group position="center" mt="md">
+                                            <Button
+                                                onClick={() =>
+                                                    form.insertListItem("languages", {
+                                                        name: "",
+                                                        key: randomId(),
+                                                    })
+                                                }
+                                            >
+                                                Add language
+                                            </Button>
+                                        </Group>
+                                    </Box>
+                                </td>
+                            </tr>
+                        </Table>
+                        <Table>
+                            <tr>
+                                <td>
 
-                            <Group position="center" mt="md">
-                                <Select
-                                    label="Resume Type"
-                                    placeholder="Pick one"
-                                    data={resumeTypes}
-                                    {...form.getInputProps("resumeType")}
+                                </td>
+                            </tr>
+                        </Table>
+
+                        <Group position="center" mt="md">
+                            <Select
+                                label="Resume Type"
+                                placeholder="Pick one"
+                                data={resumeTypes}
+                                {...form.getInputProps("resumeType")}
+                            />
+                            <Button
+                                sx={{ alignSelf: "flex-end" }}
+                                onClick={() => {
+                                    setModalOpened(true);
+                                }}
+                            >
+                                Preview
+                            </Button>
+                            <Modal
+                                opened={modalOpened}
+                                onClose={() => setModalOpened(false)}
+                                title="Resume Type Preview"
+                            >
+                                <Image
+                                    src={
+                                        "resume" +
+                                        form.values.resumeType +
+                                        ".webp"
+                                    }
                                 />
-                                <Button
-                                    sx={{ alignSelf: "flex-end" }}
-                                    onClick={() => {
-                                        setModalOpened(true);
-                                    }}
-                                >
-                                    Preview
-                                </Button>
-                                <Modal
-                                    opened={modalOpened}
-                                    onClose={() => setModalOpened(false)}
-                                    title="Resume Type Preview"
-                                >
-                                    <Image
-                                        src={
-                                            "resume" +
-                                            form.values.resumeType +
-                                            ".webp"
-                                        }
-                                    />
-                                </Modal>
-                            </Group>
-                            <Group position="center" mt="md">
-                                <Button type="submit">Submit</Button>
-                            </Group>
-                        </Box>
+                            </Modal>
+                        </Group>
+                        <Group position="center" mt="md">
+                            <Button type="submit">Submit</Button>
+                        </Group>
                     </form>
                 </Container>
             )}
